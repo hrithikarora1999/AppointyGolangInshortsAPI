@@ -127,17 +127,15 @@ func createBook(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	//Init Router
 	r := mux.NewRouter()
 
-  	// arrange our route
 	r.HandleFunc("/article", getBooks).Methods("GET")
 	r.HandleFunc("/article/{id}", getBook).Methods("GET")
 	r.HandleFunc("/article", createBook).Methods("POST")
 	r.HandleFunc("/article/search/q={title}", SearchArticle).Methods("GET")
 
 	
-  	// set our port address
-	log.Fatal(http.ListenAndServe(":4000", r))
+	log.Fatal(http.ListenAndServe(":" + os.Getenv("PORT"), r))
+
 
 }
