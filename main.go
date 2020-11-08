@@ -130,10 +130,10 @@ func createBook(w http.ResponseWriter, r *http.Request) {
 func main() {
 	r := mux.NewRouter()
 
-	r.HandleFunc("/article", getBooks).Methods("GET")
-	r.HandleFunc("/article/{id}", getBook).Methods("GET")
-	r.HandleFunc("/article", createBook).Methods("POST")
-	r.HandleFunc("/article/search/q={title}", SearchArticle).Methods("GET")
+	r.HandleFunc("/articles", getBooks).Methods("GET")
+	r.HandleFunc("/articles/{id}", getBook).Methods("GET")
+	r.HandleFunc("/articles", createBook).Methods("POST")
+	r.HandleFunc("/articles/search/q={title}", SearchArticle).Methods("GET")
 
 	
 	log.Fatal(http.ListenAndServe(":" + os.Getenv("PORT"), r))
