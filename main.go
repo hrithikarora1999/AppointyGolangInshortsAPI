@@ -15,7 +15,7 @@ import (
 
 var collection = helper.ConnectDB()
 
-func getBooks(w http.ResponseWriter, r *http.Request) {
+func Getallarticles(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
 	var articles []models.Article
@@ -49,7 +49,7 @@ func getBooks(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(articles) 
 }
 
-func getBook(w http.ResponseWriter, r *http.Request) {
+func GetArticlebyID(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
 	var article models.Article
@@ -110,7 +110,7 @@ func SearchArticle(w http.ResponseWriter, r *http.Request) {
 
 }
 
-func createBook(w http.ResponseWriter, r *http.Request) {
+func AddNewArticle(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
 	var article models.Article
@@ -130,12 +130,10 @@ func createBook(w http.ResponseWriter, r *http.Request) {
 func main() {
 	r := mux.NewRouter()
 
-	r.HandleFunc("/articles", getBooks).Methods("GET")
-	r.HandleFunc("/articles/{id}", getBook).Methods("GET")
-	r.HandleFunc("/articles", createBook).Methods("POST")
-	r.HandleFunc("/articles/search/q={title}", SearchArticle).Methods("GET")
-
-	
+	r.HandleFunc("/articles", Getallarticles).Methods("GET")
+	r.HandleFunc("/articles/{id}", GetArticlebyID).Methods("GET")
+	r.HandleFunc("/articles", AddNewArticle).Methods("POST")
+	r.HandleFunc("/articles/search/q={title}", SearchArticle).Methods("GET")	
 	log.Fatal(http.ListenAndServe(":" + os.Getenv("PORT"), r))
 
 
